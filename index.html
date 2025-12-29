@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>King Tyos — Cyberpunk</title>
+
+  <!-- Cyberpunk fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+  <div id="mouseGlow"></div>
+
+  <header class="hero">
+    <div class="topRow">
+      <div class="badge">CYBERPUNK MODE</div>
+      <button id="muteBtn" class="chipBtn" aria-label="Toggle sound">SFX: ON</button>
+    </div>
+
+    <h1 class="glitch title" data-text="Website Ini Dibuat Oleh King Tyos">
+      Website Ini Dibuat Oleh King Tyos
+    </h1>
+
+    <div class="typeWrap">
+      <p id="line1" class="typeLine"></p>
+      <p id="line2" class="typeLine"></p>
+    </div>
+
+    <div class="ctaRow">
+      <button id="toSuit" class="btn primary">Main Suit Sekarang ⤵</button>
+      <button id="toggleAuto" class="btn">Auto Scroll: ON</button>
+      <button id="openTerminal" class="btn ghost">Terminal Mode</button>
+    </div>
+
+    <div class="hint">Kalau audio ga bunyi, klik layar sekali dulu 😼</div>
+  </header>
+
+  <main>
+    <section id="suit" class="panel">
+      <h2 class="neonTitle">Suit vs Bot — Cyber Arena</h2>
+
+      <div class="scoreRow">
+        <div class="scoreCard">
+          <div class="label">Kamu</div>
+          <div id="scoreYou" class="score">0</div>
+        </div>
+        <div class="scoreCard">
+          <div class="label">Bot</div>
+          <div id="scoreBot" class="score">0</div>
+        </div>
+        <div class="scoreCard">
+          <div class="label">Seri</div>
+          <div id="scoreDraw" class="score">0</div>
+        </div>
+      </div>
+
+      <div class="pickRow">
+        <button class="pick" data-move="rock">✊<span>Batu</span></button>
+        <button class="pick" data-move="paper">✋<span>Kertas</span></button>
+        <button class="pick" data-move="scissors">✌️<span>Gunting</span></button>
+      </div>
+
+      <div class="resultBox" id="resultBox">
+        <div class="resultTop">
+          <div class="chip" id="youPick">Kamu: -</div>
+          <div class="chip" id="botPick">Bot: -</div>
+          <div class="chip small" id="streak">Streak: 0</div>
+        </div>
+
+        <div id="resultText" class="resultText">Klik pilihan di atas 😹</div>
+
+        <div class="resultActions">
+          <button id="resetScore" class="btn danger">Reset Skor</button>
+          <button id="backTop" class="btn">Balik Atas ⤴</button>
+        </div>
+
+        <div class="saveNote">Skor disimpan di browser kamu (local).</div>
+      </div>
+
+      <div class="footerNote">“Apa yang ke cari disini? Gada apa disini 😹”</div>
+    </section>
+  </main>
+
+  <!-- Terminal overlay -->
+  <div id="terminalOverlay" class="terminalOverlay hidden" role="dialog" aria-modal="true">
+    <div class="terminalCard">
+      <div class="terminalTop">
+        <div class="terminalTitle">TYOS://TERMINAL</div>
+        <button id="closeTerminal" class="chipBtn">CLOSE ✕</button>
+      </div>
+      <div id="terminalOut" class="terminalOut"></div>
+      <div class="terminalInRow">
+        <span class="prompt">></span>
+        <input id="terminalIn" class="terminalIn" autocomplete="off" placeholder="ketik: help" />
+      </div>
+      <div class="terminalHint">Command: <b>help</b>, <b>suit</b>, <b>top</b>, <b>clear</b>, <b>about</b></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
