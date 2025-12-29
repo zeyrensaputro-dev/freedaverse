@@ -3,27 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>King Tyos — Cyberpunk</title>
+  <title>Freedaverse — King Tyos</title>
 
-  <!-- Cyberpunk fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- FX layers -->
   <canvas id="bg"></canvas>
   <div id="scanlines"></div>
   <div id="vignette"></div>
   <div id="mouseGlow"></div>
 
+  <!-- HERO -->
   <header class="hero">
-    <div class="topRow">
-      <div class="badge">CYBERPUNK MODE</div>
-      <button id="muteBtn" class="chipBtn" aria-label="Toggle sound">SFX: ON</button>
-    </div>
-
     <h1 class="glitch title" data-text="Website Ini Dibuat Oleh King Tyos">
       Website Ini Dibuat Oleh King Tyos
     </h1>
@@ -31,35 +28,60 @@
     <div class="typeWrap">
       <p id="line1" class="typeLine"></p>
       <p id="line2" class="typeLine"></p>
+      <p id="line3" class="typeLine"></p>
     </div>
 
-    <div class="ctaRow">
-      <button id="toSuit" class="btn primary">Main Suit Sekarang ⤵</button>
-      <button id="toggleAuto" class="btn">Auto Scroll: ON</button>
-      <button id="openTerminal" class="btn ghost">Terminal Mode</button>
-    </div>
-
-    <div class="hint">Kalau audio ga bunyi, klik layar sekali dulu 😼</div>
+    <button id="startBtn" class="btn primary big">MULAI</button>
   </header>
 
+  <!-- SETUP -->
   <main>
-    <section id="suit" class="panel">
-      <h2 class="neonTitle">Suit vs Bot — Cyber Arena</h2>
+    <section id="setup" class="panel hidden">
+      <h2 class="neonTitle">SETUP MATCH</h2>
+
+      <!-- STEP 1 -->
+      <div class="setupBlock">
+        <div class="setupTitle">1. Pilih Best Of</div>
+        <div class="setupBtns">
+          <button class="setupBtn" data-bo="3">BO 3</button>
+          <button class="setupBtn" data-bo="5">BO 5</button>
+        </div>
+        <div id="boHint" class="hint">Pilih format match dulu</div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="diffBlock" class="setupBlock disabled">
+        <div class="setupTitle">2. Pilih Difficulty</div>
+        <div class="setupBtns">
+          <button class="setupBtn2" data-diff="easy">Easy</button>
+          <button class="setupBtn2" data-diff="medium">Medium</button>
+          <button class="setupBtn2 hard" data-diff="hard">Hard</button>
+        </div>
+        <div id="diffHint" class="hint">Pilih difficulty</div>
+      </div>
+    </section>
+
+    <!-- ARENA -->
+    <section id="arena" class="panel hidden">
+      <div class="chipRow">
+        <span id="chipMatch" class="chip">Match: -</span>
+        <span id="chipDiff" class="chip">Difficulty: -</span>
+        <span id="chipIQ" class="chip">BOT IQ: -</span>
+        <span id="chipCD" class="chip">Ready</span>
+      </div>
 
       <div class="scoreRow">
-        <div class="scoreCard">
-          <div class="label">Kamu</div>
-          <div id="scoreYou" class="score">0</div>
-        </div>
-        <div class="scoreCard">
-          <div class="label">Bot</div>
-          <div id="scoreBot" class="score">0</div>
-        </div>
-        <div class="scoreCard">
-          <div class="label">Seri</div>
-          <div id="scoreDraw" class="score">0</div>
-        </div>
+        <div class="scoreCard"><div class="label">Khe</div><div id="scoreYou" class="score">0</div></div>
+        <div class="scoreCard"><div class="label">Bot</div><div id="scoreBot" class="score">0</div></div>
+        <div class="scoreCard"><div class="label">Seri</div><div id="scoreDraw" class="score">0</div></div>
       </div>
+
+      <div class="matchInfo">
+        <span id="matchScore">Match: 0 - 0</span>
+        <span id="streak">Streak: 0</span>
+      </div>
+
+      <div id="matchBanner" class="banner hidden"></div>
 
       <div class="pickRow">
         <button class="pick" data-move="rock">✊<span>Batu</span></button>
@@ -69,38 +91,33 @@
 
       <div class="resultBox" id="resultBox">
         <div class="resultTop">
-          <div class="chip" id="youPick">Kamu: -</div>
-          <div class="chip" id="botPick">Bot: -</div>
-          <div class="chip small" id="streak">Streak: 0</div>
+          <div id="youPick" class="chip">Khe: -</div>
+          <div id="botPick" class="chip">Bot: -</div>
         </div>
-
-        <div id="resultText" class="resultText">Klik pilihan di atas 😹</div>
+        <div id="resultText" class="resultText">Pilih move 😼</div>
 
         <div class="resultActions">
-          <button id="resetScore" class="btn danger">Reset Skor</button>
-          <button id="backTop" class="btn">Balik Atas ⤴</button>
+          <button id="resetMatch" class="btn ghost">Reset Match</button>
+          <button id="resetAll" class="btn danger">Reset Semua</button>
         </div>
-
-        <div class="saveNote">Skor disimpan di browser kamu (local).</div>
       </div>
 
-      <div class="footerNote">“Apa yang ke cari disini? Gada apa disini 😹”</div>
+      <div class="saveRow">
+        <button id="exportSave" class="btn">Export Save</button>
+        <button id="importSave" class="btn">Import Save</button>
+      </div>
     </section>
   </main>
 
-  <!-- Terminal overlay -->
-  <div id="terminalOverlay" class="terminalOverlay hidden" role="dialog" aria-modal="true">
-    <div class="terminalCard">
-      <div class="terminalTop">
-        <div class="terminalTitle">TYOS://TERMINAL</div>
-        <button id="closeTerminal" class="chipBtn">CLOSE ✕</button>
+  <!-- MODAL SAVE -->
+  <div id="saveModal" class="modal hidden">
+    <div class="modalCard">
+      <div class="modalTitle">TYOS://SAVE</div>
+      <textarea id="saveText" readonly></textarea>
+      <div class="modalActions">
+        <button id="copySave" class="btn primary">COPY</button>
+        <button id="closeSave" class="btn">CLOSE</button>
       </div>
-      <div id="terminalOut" class="terminalOut"></div>
-      <div class="terminalInRow">
-        <span class="prompt">></span>
-        <input id="terminalIn" class="terminalIn" autocomplete="off" placeholder="ketik: help" />
-      </div>
-      <div class="terminalHint">Command: <b>help</b>, <b>suit</b>, <b>top</b>, <b>clear</b>, <b>about</b></div>
     </div>
   </div>
 
